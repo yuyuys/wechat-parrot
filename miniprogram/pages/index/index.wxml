@@ -1,0 +1,90 @@
+<!--index.wxml-->
+<view class="container">
+
+  <!-- 用户 openid
+  <view class="userinfo">
+    <button 
+      open-type="getUserInfo" 
+      bindgetuserinfo="onGetUserInfo"
+      class="userinfo-avatar"
+      style="background-image: url({{avatarUrl}})"
+      size="default"
+    ></button>
+    <view class="userinfo-nickname-wrapper">
+      <button class="userinfo-nickname" bindtap="onGetOpenid">点击获取 openid</button>
+    </view>
+  </view> -->
+
+
+  <!-- 选择音频 -->
+  <view class="uploader">
+    <view class="uploader-text" bindtap="doChooseVoice">
+      <text>选择音频（点击）</text>
+    </view>
+    <view wx:if="{{voiceName}}">
+      <text>当前选择音频：{{voiceName}}</text>
+    </view>
+  </view>
+
+  <view class='countDown'>剩余播放次数：<text style='color:red'>{{countDownTimer}}</text></view>
+
+  <view class='comment-cnt'>
+    <text>设置重复播放次数：</text>
+    <input class='comment-ipt' type='number' placeholder='重复次数'  bindinput='onInputCount' value='{{settingCounDown}}'></input>
+    <text>设置重复播放间隔(秒)：</text>
+    <input class='comment-ipt' type='number' placeholder='重复间隔'  bindinput='onInputInterval' value='{{countDownInterval/1000}}'></input>
+  </view>
+
+  <!-- 播放音频 -->
+  <view wx:if="{{!bPlaying}}">
+    <view class="play-btn" bindtap="doPlayVoice">
+      <text>播放</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="play-btn" bindtap="doStopPlayVoice">
+      <text>停止播放</text>
+    </view>
+  </view>
+  
+
+  <!-- 录音 -->
+  <view wx:if="{{!bRecording}}">
+    <view class="play-btn" bindtap="doRecordVoice">
+      <text>开始录音</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="play-btn" bindtap="doCancelRecordVoice">
+      <text>停止录音</text>
+    </view>
+  </view>
+
+  <!-- 使用录音 -->
+  <view wx:if="{{recordVoice!=null}}">
+    <view wx:if="{{!bUseRecordVoice}}">
+      <view class="play-btn" bindtap="doUseRecordVoice">
+        <text>使用录音</text>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="play-btn" bindtap="doNotRecordVoice">
+        <text>取消使用录音</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 后台播放 -->
+  <view wx:if="{{!bBGPlaying}}">
+    <view class="play-btn" bindtap="doPlayVoiceBG">
+      <text>后台播放</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="play-btn" bindtap="doStopPlayVoiceBG">
+      <text>停止后台播放</text>
+    </view>
+  </view>
+  
+
+</view>
