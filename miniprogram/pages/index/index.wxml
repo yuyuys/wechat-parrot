@@ -17,10 +17,10 @@
 
 
   <!-- 选择音频 -->
-  <view class="uploader">
-    <view class="uploader-text" bindtap="doChooseVoice">
-      <text>选择音频（点击）</text>
-    </view>
+  <view class="play-btn" bindtap="doChooseVoice">
+      <text>选择录音文件</text>
+  </view>
+  <view class="uploader">  
     <view wx:if="{{voiceName}}">
       <text>当前选择音频：{{voiceName}}</text>
     </view>
