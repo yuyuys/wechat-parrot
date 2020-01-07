@@ -26,7 +26,7 @@ page {
 }
 
 .play-btn {
-  margin: 12rpx auto;
+  margin: 15rpx auto;
   width: 250rpx;
   height: 80rpx;
   line-height: 80rpx;
@@ -35,4 +35,8 @@ page {
   border-radius: 10rpx;
   font-size: 30rpx;
   color: #34373D;
+}
+
+.countDown {
+  margin: 32rpx auto;
 }
