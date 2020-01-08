@@ -18,7 +18,7 @@ Page({
     intervalID: null,
     countDownTimer: 1,   //倒计时剩余次数
     settingCounDown: 1,  //设置重复的次数
-    countDownInterval: 1,
+    countDownInterval: 2000,
     bPlaying: false,
     //录音数据
     recordManager: null,
@@ -35,7 +35,7 @@ Page({
     this.setData({
       voiceName: defaultName,
       countDownTimer: 1,
-      countDownInterval: 1000,
+      countDownInterval: 2000,
     })
     //音频播放器
     const innerAudioContext = wx.createInnerAudioContext()
@@ -59,12 +59,18 @@ Page({
       that.setData({
         bRecording: true
       })
+      wx.showToast({
+        title: "录音中",
+        image: "../../images/microphone.png" ,
+        duration: 30000//先定义个60秒，后面可以手动调用wx.hideToast()隐藏
+      })
     })
     recorderManager.onStop((res) => {
       that.setData({
         recordVoice: res.tempFilePath,
         bRecording: false
       })
+      wx.hideToast()
     })
     this.data.recordManager = recorderManager
 
@@ -84,8 +90,6 @@ Page({
         that.setData({
           voiceName: res.tempFiles[0].name,
           fileVoice: res.tempFiles[0].path,
-          countDownTimer: 1,
-          countDownInterval: 1,
         })
         let innerAudioContext = that.data.innerAudioContext
         innerAudioContext.autoPlay = false
@@ -112,15 +116,19 @@ Page({
 
   // 播放音频
   doPlayVoice: function () {
-    if (this.data.countDownTimer < 1 || this.data.countDownInterval < 1000) {
+    if (this.data.countDownTimer < 1 || this.data.countDownInterval < 2000) {
       this.data.countDownTimer = 1
-      this.data.countDownInterval = 1000
+      this.data.countDownInterval = 2000
     }
 
     const settingNum = this.data.settingCounDown
     this.setData({
       countDownTimer: settingNum
     })
+
+    if (this.data.countDownInterval < this.data.innerAudioContext.duration + 200) {
+      this.data.countDownInterval = this.data.innerAudioContext.duration + 200
+    }
       
     this.data.innerAudioContext.play()
     this.countDown()

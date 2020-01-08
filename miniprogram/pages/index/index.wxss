@@ -26,7 +26,7 @@ page {
 }
 
 .play-btn {
-  margin: 15rpx auto;
+  margin: 20rpx auto;
   width: 250rpx;
   height: 80rpx;
   line-height: 80rpx;

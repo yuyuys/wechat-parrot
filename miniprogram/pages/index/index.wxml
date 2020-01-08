@@ -47,6 +47,17 @@
     </view>
   </view>
   
+  <!-- 后台播放 -->
+  <view wx:if="{{!bBGPlaying}}">
+    <view class="play-btn" bindtap="doPlayVoiceBG">
+      <text>后台播放</text>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="play-btn" bindtap="doStopPlayVoiceBG">
+      <text>停止后台播放</text>
+    </view>
+  </view>
 
   <!-- 录音 -->
   <view wx:if="{{!bRecording}}">
@@ -74,17 +85,7 @@
     </view>
   </view>
 
-  <!-- 后台播放 -->
-  <view wx:if="{{!bBGPlaying}}">
-    <view class="play-btn" bindtap="doPlayVoiceBG">
-      <text>后台播放</text>
-    </view>
-  </view>
-  <view wx:else>
-    <view class="play-btn" bindtap="doStopPlayVoiceBG">
-      <text>停止后台播放</text>
-    </view>
-  </view>
+
   
 
 </view>
